@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "redcarpet-socialable"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["Jan Bernacki"]
   spec.email         = ["releu@me.com"]
   spec.description   = %q{@mention and #hashtag features for redcarpet}
