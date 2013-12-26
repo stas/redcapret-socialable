@@ -5,7 +5,7 @@ This gem provides a HTML renderer for [redcarpet](https://github.com/vmg/redcarp
 ## How to use
 
 ```ruby
-gem "tweetable-redcarpet"
+gem "tweetable_redcarpet"
 ```
 
 ```ruby
