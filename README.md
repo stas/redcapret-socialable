@@ -27,4 +27,10 @@ class MyAwesomeRenderer < TweetableRedcarpet
     %(<a href="#" title="#{name}">@#{name}</a>)
   end
 end
+
+renderer = MyAwesomeRenderer.new(options) # use redcarpet's options https://github.com/vmg/redcarpet
+markdown = Redcarpet::Markdown.new(renderer, space_after_headers: true)
+
+markdown.render "#foo\n@bar" # => <p><a href="#" title="foo">#foo</a> <a href="#" title="bar">@bar</a></p>
+
 ```
