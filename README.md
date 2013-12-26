@@ -10,7 +10,7 @@ gem "tweetable_redcarpet"
 
 ```ruby
 # override the following methods for your case
-class MyAwesomeRenderer < TweetableRedcarpet
+class MyAwesomeRenderer < Redcarpet::Socialable
   def highlight_tag?(name)
     Tag.where(name: name.downcase).first_or_create!
   end
