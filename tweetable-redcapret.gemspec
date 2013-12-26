@@ -1,7 +1,6 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'tweetable/redcapret/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "tweetable-redcapret"
@@ -9,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jan Bernacki"]
   spec.email         = ["releu@me.com"]
   spec.description   = %q{@mention and #hashtag features for redcarpet}
-  spec.summary       = %q{@mention and #hashtag features for redcarpet}
-  spec.homepage      = ""
+  spec.summary       = %q{@mention and #hashtag features for redcarpet, the Markdown renderer}
+  spec.homepage      = "https://github.com/releu/tweetable-redcapret"
   spec.license       = "MIT"
   
   spec.files         = `git ls-files`.split($/)
