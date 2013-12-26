@@ -9,7 +9,7 @@ gem "tweetable-redcarpet"
 ```
 
 ```ruby
-# override methods for your case
+# override the following methods for your case
 class MyAwesomeRenderer < TweetableRedcarpet
   def highlight_tag?(name)
     Tag.where(name: name.downcase).first_or_create!
@@ -30,8 +30,8 @@ end
 
 # use redcarpet's options https://github.com/vmg/redcarpet
 renderer = MyAwesomeRenderer.new
+# space_after_headers must be true for hashtag feature
 markdown = Redcarpet::Markdown.new(renderer, space_after_headers: true)
 
 markdown.render "#foo\n@bar" # => <p><a>#foo</a><br><a>@bar</a></p>
-
 ```
