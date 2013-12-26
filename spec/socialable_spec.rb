@@ -1,31 +1,31 @@
-require File.expand_path("../../lib/tweetable_redcarpet", __FILE__)
+require File.expand_path("../../lib/redcarpet/socialable", __FILE__)
 
-class NoTags < TweetableRedcarpet
+class NoTags < Redcarpet::Socialable
   def highlight_tag?(name)
     false
   end
 end
 
-class NoMentions < TweetableRedcarpet
+class NoMentions < Redcarpet::Socialable
   def highlight_username?(name)
     false
   end
 end
 
-class SpanTags < TweetableRedcarpet
+class SpanTags < Redcarpet::Socialable
   def tag_template(name)
     "<span>#{name}</span>"
   end
 end
 
-class SpanMentions < TweetableRedcarpet
+class SpanMentions < Redcarpet::Socialable
   def mention_template(name)
     "<span>#{name}</span>"
   end
 end
 
-describe TweetableRedcarpet do
-  let(:renderer) { TweetableRedcarpet.new }
+describe Redcarpet::Socialable do
+  let(:renderer) { Redcarpet::Socialable.new }
   let(:markdown) do
     Redcarpet::Markdown.new(renderer, space_after_headers: true)
   end

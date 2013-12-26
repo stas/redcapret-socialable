@@ -3,13 +3,13 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
-  spec.name          = "tweetable_redcapret"
+  spec.name          = "redcarpet-socialable"
   spec.version       = "0.0.1"
   spec.authors       = ["Jan Bernacki"]
   spec.email         = ["releu@me.com"]
   spec.description   = %q{@mention and #hashtag features for redcarpet}
   spec.summary       = %q{@mention and #hashtag features for redcarpet, the Markdown renderer}
-  spec.homepage      = "https://github.com/releu/tweetable_redcapret"
+  spec.homepage      = "https://github.com/releu/redcarpet-socialable"
   spec.license       = "MIT"
   
   spec.files         = `git ls-files`.split($/)
