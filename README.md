@@ -12,25 +12,26 @@ gem "tweetable-redcarpet"
 # override methods for your case
 class MyAwesomeRenderer < TweetableRedcarpet
   def highlight_tag?(name)
-    true # User.where(username: name).exists?
+    Tag.where(name: name.downcase).first_or_create!
   end
   
   def highlight_username?(name)
-    true
+    User.where(username: name).exists?
   end
   
   def tag_template(name)
-    %(<a href="#" title="#{name}">##{name}</a>)
+    %(<a>##{name}</a>)
   end
   
   def mention_template(name)
-    %(<a href="#" title="#{name}">@#{name}</a>)
+    %(<a>@#{name}</a>)
   end
 end
 
-renderer = MyAwesomeRenderer.new(options) # use redcarpet's options https://github.com/vmg/redcarpet
+# use redcarpet's options https://github.com/vmg/redcarpet
+renderer = MyAwesomeRenderer.new
 markdown = Redcarpet::Markdown.new(renderer, space_after_headers: true)
 
-markdown.render "#foo\n@bar" # => <p><a href="#" title="foo">#foo</a> <a href="#" title="bar">@bar</a></p>
+markdown.render "#foo\n@bar" # => <p><a>#foo</a><br><a>@bar</a></p>
 
 ```
