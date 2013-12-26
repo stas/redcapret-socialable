@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["releu@me.com"]
   spec.description   = %q{@mention and #hashtag features for redcarpet}
   spec.summary       = %q{@mention and #hashtag features for redcarpet, the Markdown renderer}
-  spec.homepage      = "https://github.com/releu/tweetable-redcapret"
+  spec.homepage      = "https://github.com/releu/tweetable_redcapret"
   spec.license       = "MIT"
   
   spec.files         = `git ls-files`.split($/)
