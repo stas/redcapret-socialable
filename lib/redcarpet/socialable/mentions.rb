@@ -3,9 +3,10 @@ require 'redcarpet'
 module Redcarpet::Socialable::Mentions
 
   def postprocess(document)
-    if self.respond_to?(:process_mentions?) and process_mentions?
-      document = process_mentions(text)
-    end
+    # Disable postprocess-ing for legacy renderer
+    return document if respond_to?(:safe_replace)
+
+    document = process_mentions(document)
 
     if defined?(super)
       super(document)
@@ -36,9 +37,10 @@ module Redcarpet::Socialable::Mentions
 
   def process_mentions(text)
     regexp = Regexp.new(::Redcarpet::Socialable::BASE_REGEXP % mention_regexp)
+
     text.gsub!(regexp) do |match|
       before, raw, after = $1, $2, $3
-      if mention?($2)
+      if mention?(raw)
         before + mention_template(raw) + after
       else
         match
