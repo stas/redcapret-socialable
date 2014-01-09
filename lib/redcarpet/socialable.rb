@@ -8,7 +8,7 @@ module Redcarpet
     include Mentions
     include Hashtags
 
-    BASE_REGEXP = '(^|[\s])+%s(\b|\-|\.|,|:|;|\?|!|\(|\)|$){1}'
+    BASE_REGEXP = '(^|[\s\>])+%s(\b|\-|\.|,|:|;|\?|!|\(|\)|$){1}'
 
     def paragraph(text)
       "<p>#{safe_replace(text)}</p>"
