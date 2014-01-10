@@ -31,35 +31,22 @@ module Redcarpet::Socialable::Hashtags
 
   def hashtag?(matched_text)
     # Some backwards compatibility
-    self.respond_to?(:highlight_tag?) ? highlight_tag?(matched_text) : true
+    respond_to?(:highlight_tag?) ? highlight_tag?(matched_text) : true
   end
 
   def process_hashtags(text)
-    html_extractions = {}
-    extraction_template = '{extraction-%s}'
-
-    # Cut HTML tags first, to avoid messing up those
-    text.gsub!(%r{>.*?</}m) do |match|
-      md5 = Digest::MD5.hexdigest(match)
-      html_extractions[md5] = match
-      extraction_template % md5
-    end
-
-    # highlight tags
+    # Find and render tags
     regexp = Regexp.new(::Redcarpet::Socialable::BASE_REGEXP % hashtag_regexp)
+
     text.gsub!(regexp) do |match|
-      before, raw, after = $1, $2, $3
+      start_tag, before, raw, after, close_tag = $1, $2, $3, $4, $5
+      return match if start_tag.to_s.start_with?('<a')
+
       if hashtag?(raw)
-        before + hashtag_template(raw) + after
+        %{#{start_tag}#{before}#{hashtag_template(raw)}#{after}#{close_tag}}
       else
         match
       end
-    end
-
-    # Paste back previously extracted HTML tags
-    html_extractions.each do |md5, html|
-      extraction = extraction_template % md5
-      text.sub!(extraction, html)
     end
 
     text

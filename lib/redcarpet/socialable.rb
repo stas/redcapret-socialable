@@ -8,7 +8,17 @@ module Redcarpet
     include Mentions
     include Hashtags
 
-    BASE_REGEXP = '(^|[\s\>])+%s(\b|\-|\.|,|:|;|\?|!|\(|\)|$){1}'
+    BASE_REGEXP =
+      # If there's an HTML tag, catch it, we need this to exclude link tags
+      '(<\/?[^>]*>)?' +
+      # There should be a whitespace or beginning of line
+      '(^|[\s\>])+' +
+      # Placeholder for what we want to match
+      '%s' +
+      # This is where match ends
+      '(\b|\-|\.|,|:|;|\?|!|\(|\)|$)' +
+      # Closing HTML tag if any
+      '(<\/?[^>]*>)?'
 
     def paragraph(text)
       "<p>#{safe_replace(text)}</p>"
