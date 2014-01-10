@@ -3,9 +3,10 @@ require 'redcarpet'
 module Redcarpet::Socialable::Hashtags
 
   def postprocess(document)
-    if self.respond_to?(:process_hashtags?) and process_hashtags?
-      document = process_hashtags(text)
-    end
+    # Disable postprocess-ing for legacy renderer
+    return document if respond_to?(:safe_replace)
+
+    document = process_hashtags(document)
 
     if defined?(super)
       super(document)
