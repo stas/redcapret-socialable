@@ -39,9 +39,11 @@ module Redcarpet::Socialable::Mentions
     regexp = Regexp.new(::Redcarpet::Socialable::BASE_REGEXP % mention_regexp)
 
     text.gsub!(regexp) do |match|
-      before, raw, after = $1, $2, $3
+      start_tag, before, raw, after, close_tag = $1, $2, $3, $4, $5
+      return match if start_tag.to_s.start_with?('<a')
+
       if mention?(raw)
-        before + mention_template(raw) + after
+        %{#{start_tag}#{before}#{mention_template(raw)}#{after}#{close_tag}}
       else
         match
       end
