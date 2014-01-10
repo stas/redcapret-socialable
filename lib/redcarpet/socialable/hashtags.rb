@@ -32,7 +32,11 @@ module Redcarpet::Socialable::Hashtags
 
   def hashtag?(matched_text)
     # Some backwards compatibility
-    respond_to?(:highlight_tag?) ? highlight_tag?(matched_text) : true
+    if respond_to?(:highlight_tag?)
+      matched_text if highlight_tag?(matched_text)
+    else
+      matched_text
+    end
   end
 
   def process_hashtags(text)
@@ -43,8 +47,8 @@ module Redcarpet::Socialable::Hashtags
       start_tag, before, raw, after, close_tag = $1, $2, $3, $4, $5
       return match if start_tag.to_s.start_with?('<a')
 
-      if hashtag?(raw)
-        %{#{start_tag}#{before}#{hashtag_template(raw)}#{after}#{close_tag}}
+      if hashtag = hashtag?(raw)
+        %{#{start_tag}#{before}#{hashtag_template(hashtag)}#{after}#{close_tag}}
       else
         match
       end

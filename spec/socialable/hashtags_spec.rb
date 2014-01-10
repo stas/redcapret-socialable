@@ -74,6 +74,13 @@ describe Redcarpet::Socialable::Hashtags do
     end
 
     it { should eq("<p>#tagged</p>\n")}
+
+    context 'returns a processed string' do
+      let(:hashtag) { 'TAGGED' }
+      before { markdown.renderer.should_receive(:hashtag?).and_return(hashtag) }
+
+      it { should include(render_class.new.send(:hashtag_template, hashtag))}
+    end
   end
 
 end

@@ -29,9 +29,9 @@ module Redcarpet::Socialable::Mentions
   def mention?(matched_text)
     # Some backwards compatibility
     if respond_to?(:highlight_username?)
-      highlight_username?(matched_text)
+      matched_text if highlight_username?(matched_text)
     else
-      true
+      matched_text
     end
   end
 
@@ -42,8 +42,8 @@ module Redcarpet::Socialable::Mentions
       start_tag, before, raw, after, close_tag = $1, $2, $3, $4, $5
       return match if start_tag.to_s.start_with?('<a')
 
-      if mention?(raw)
-        %{#{start_tag}#{before}#{mention_template(raw)}#{after}#{close_tag}}
+      if mention = mention?(raw)
+        %{#{start_tag}#{before}#{mention_template(mention)}#{after}#{close_tag}}
       else
         match
       end

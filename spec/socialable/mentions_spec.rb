@@ -74,6 +74,13 @@ describe Redcarpet::Socialable::Mentions do
     end
 
     it { should eq("<p>@mention</p>\n")}
+
+    context 'returns a processed string' do
+      let(:mention) { 'MENTION' }
+      before { markdown.renderer.should_receive(:mention?).and_return(mention) }
+
+      it { should include(render_class.new.send(:mention_template, mention))}
+    end
   end
 
 end
