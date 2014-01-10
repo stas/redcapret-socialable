@@ -16,7 +16,7 @@ module Redcarpet
       # Placeholder for what we want to match
       '%s' +
       # This is where match ends
-      '(\b|\-|\.|,|:|;|\?|!|\(|\)|$)' +
+      '(\b|\-|\.|,|:|;|\?|!|\(|\)|$)?' +
       # Closing HTML tag if any
       '(<\/?[^>]*>)?'
 
