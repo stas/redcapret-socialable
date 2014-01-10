@@ -4,9 +4,9 @@ module Redcarpet::Socialable::Mentions
 
   def postprocess(document)
     # Disable postprocess-ing for legacy renderer
-    return document if respond_to?(:safe_replace)
-
-    document = process_mentions(document)
+    unless respond_to?(:safe_replace)
+      document = process_mentions(document)
+    end
 
     if defined?(super)
       super(document)

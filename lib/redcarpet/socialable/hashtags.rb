@@ -4,9 +4,9 @@ module Redcarpet::Socialable::Hashtags
 
   def postprocess(document)
     # Disable postprocess-ing for legacy renderer
-    return document if respond_to?(:safe_replace)
-
-    document = process_hashtags(document)
+    unless respond_to?(:safe_replace)
+      document = process_hashtags(document)
+    end
 
     if defined?(super)
       super(document)
